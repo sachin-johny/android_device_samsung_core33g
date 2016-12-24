@@ -129,9 +129,6 @@ TARGET_RECOVERY_FSTAB := device/samsung/core33g/rootdir/recovery.fstab
 # Assert
 TARGET_OTA_ASSERT_DEVICE := SM-G360H,SM-G360HU,core33g,core33gdd,core33gdx
 
-# SELinux
-BOARD_SEPOLICY_DIRS += device/samsung/core33g/sepolicy
-
 # Enable dex-preoptimization to speed up the first boot sequence
 WITH_DEXPREOPT := true
 WITH_DEXPREOPT_PIC := true
