@@ -64,3 +64,4 @@ the 2nd for to revert the patches which applied earlier
 * [hardware/libhardware](https://github.com/CyanogenMod/android_hardware_libhardware/compare/cm-13.0...ngoquang2708:cm-13.0.patch)
 * [system/core](https://github.com/CyanogenMod/android_system_core/compare/cm-13.0...ngoquang2708:cm-13.0.patch)
 * [system/media](https://github.com/CyanogenMod/android_system_media/compare/cm-13.0...ngoquang2708:cm-13.0.patch)
+* [build](https://github.com/CyanogenMod/android_build/compare/cm-13.0...ngoquang2708:cm-13.0.patch)
