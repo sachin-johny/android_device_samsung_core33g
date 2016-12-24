@@ -93,7 +93,6 @@ PRODUCT_PACKAGES += \
 # Audio
 PRODUCT_PACKAGES += \
 	audio.primary.sc8830 \
-	audio_policy.sc8830 \
 	audio.r_submix.default \
 	audio.usb.default \
 	libaudio-resampler \
