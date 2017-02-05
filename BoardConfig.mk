@@ -27,7 +27,7 @@ TARGET_ARCH_VARIANT := armv7-a-neon
 TARGET_CPU_VARIANT := cortex-a7
 TARGET_CPU_SMP := true
 ARCH_ARM_HAVE_TLS_REGISTER := true
-TARGET_BOOTLOADER_BOARD_NAME := sc7730s
+TARGET_BOOTLOADER_BOARD_NAME := SC7730S
 TARGET_GLOBAL_CFLAGS += -mtune=cortex-a7 -mfpu=neon -mfloat-abi=softfp
 TARGET_GLOBAL_CPPFLAGS += -mtune=cortex-a7 -mfpu=neon -mfloat-abi=softfp
 BOARD_VENDOR := samsung
@@ -129,7 +129,7 @@ TARGET_RECOVERY_FSTAB := device/samsung/core33g/rootdir/recovery.fstab
 TARGET_OTA_ASSERT_DEVICE := SM-G360H,SM-G360HU,core33g,core33gdd,core33gdx
 
 # Memory
-MALLOC_IMPL := dlmalloc
+BOARD_USES_LEGACY_MMAP := true
 
 # Enable dex-preoptimization to speed up the first boot sequence
 WITH_DEXPREOPT := true
