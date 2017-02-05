@@ -9,6 +9,12 @@ on init
 
     # Support Preload install apks
     mkdir /preload 0771 system system
+
+    # See storage config details at https://source.android.com/devices/storage/
+
+    # Support legacy paths
+    symlink /sdcard /mnt/sdcard
+    symlink /sdcard /storage/sdcard0
 	
     #thermistor
     chown radio system /sys/class/sec/sec-thermistor/temp_adc
@@ -188,25 +194,25 @@ on boot
     chown system system /sys/kernel/sysrpc/mtest
 
 # Battery
-   chown system radio /sys/class/power_supply/battery/batt_slate_mode
-   chown system radio /sys/class/power_supply/battery/factory_mode
-   chown system radio /sys/class/power_supply/battery/siop_level
-   chown system radio /sys/class/power_supply/battery/wc_enable
-   chown system radio /sys/class/power_supply/battery/update
-   chown sdcard_rw sdcard_rw /sys/class/power_supply/battery/call
-   chown sdcard_rw sdcard_rw /sys/class/power_supply/battery/video
-   chown sdcard_rw sdcard_rw /sys/class/power_supply/battery/music
-   chown sdcard_rw sdcard_rw /sys/class/power_supply/battery/browser
-   chown sdcard_rw sdcard_rw /sys/class/power_supply/battery/hotspot
-   chown sdcard_rw sdcard_rw /sys/class/power_supply/battery/camera
-   chown system radio /sys/class/power_supply/battery/talk_wcdma
-   chown system radio /sys/class/power_supply/battery/talk_gsm
-   chown system radio /sys/class/power_supply/battery/call
-   chown system radio /sys/class/power_supply/battery/data_call
-   chown system radio /sys/class/power_supply/battery/gps
-   chown system radio /sys/class/power_supply/battery/wifi
-   chown system radio /sys/class/power_supply/battery/lte
-   chown system radio /sys/class/power_supply/battery/lcd
+    chown system radio /sys/class/power_supply/battery/batt_slate_mode
+    chown system radio /sys/class/power_supply/battery/factory_mode
+    chown system radio /sys/class/power_supply/battery/siop_level
+    chown system radio /sys/class/power_supply/battery/wc_enable
+    chown system radio /sys/class/power_supply/battery/update
+    chown sdcard_rw sdcard_rw /sys/class/power_supply/battery/call
+    chown sdcard_rw sdcard_rw /sys/class/power_supply/battery/video
+    chown sdcard_rw sdcard_rw /sys/class/power_supply/battery/music
+    chown sdcard_rw sdcard_rw /sys/class/power_supply/battery/browser
+    chown sdcard_rw sdcard_rw /sys/class/power_supply/battery/hotspot
+    chown sdcard_rw sdcard_rw /sys/class/power_supply/battery/camera
+    chown system radio /sys/class/power_supply/battery/talk_wcdma
+    chown system radio /sys/class/power_supply/battery/talk_gsm
+    chown system radio /sys/class/power_supply/battery/call
+    chown system radio /sys/class/power_supply/battery/data_call
+    chown system radio /sys/class/power_supply/battery/gps
+    chown system radio /sys/class/power_supply/battery/wifi
+    chown system radio /sys/class/power_supply/battery/lte
+    chown system radio /sys/class/power_supply/battery/lcd
 
 # fake some battery state
     setprop status.battery.state Slow
@@ -232,10 +238,6 @@ on boot
     chown radio system /sys/class/secgpio_check/secgpio_check_all/gpioinfo_check
     chown radio system /sys/class/secgpio_check/secgpio_check_all/gpioinit_check
     chown radio system /sys/class/secgpio_check/secgpio_check_all/gpiosleep_check
-
-    # For WV DRM
-    chown drm drm /dev/bcm_kbox
-    chmod 0660 /dev/bcm_kbox
 
     # create directory for DRM plug-ins
     mkdir /data/drm 0770 drm drm
@@ -273,8 +275,8 @@ on boot
     setprop ro.multisim.simslotcount 2
 
 #for efs
-     chown radio system /efs
-     chmod 0771 /efs
+    chown radio system /efs
+    chmod 0771 /efs
 
 # Broadcom GPS
     chown system system /dev/ttyS3
@@ -363,12 +365,41 @@ service drm /system/bin/drmserver
 on post-fs-data
     setprop vold.post_fs_data_done 1
 
+#wcdma rild service
+service ril-daemon /system/bin/rild -l /system/lib/libreference-ril_sp.so -m w -n 0
+    class core
+    socket rild stream 660 root radio
+    socket rild-debug stream 660 radio system
+    disabled
+    user root
+    group radio cache inet misc audio sdcard_rw log shell sdcard_r
+    setenv LD_SHIM_LIBS /system/lib/libril.so|libril_shim.so
+
+service ril-daemon2 /system/bin/rild -l /system/lib/libreference-ril_sp.so -m w -n 1
+    class core
+    socket rild1 stream 660 root radio
+    socket rild-debug1 stream 660 radio system
+    disabled
+    user root
+    group radio cache inet misc audio sdcard_rw log shell sdcard_r
+    setenv LD_SHIM_LIBS /system/lib/libril.so|libril_shim.so
+
+service ril-daemon3 /system/bin/rild -l /system/lib/libreference-ril_sp.so -m w -n 2
+    class core
+    socket rild2 stream 660 root radio
+    socket rild-debug2 stream 660 radio system
+    disabled
+    user root
+    group radio cache inet misc audio sdcard_rw log shell sdcard_r
+    setenv LD_SHIM_LIBS /system/lib/libril.so|libril_shim.so
+
 # GPS
 service gpsd /system/bin/gpsd -c /system/etc/gps.xml
     class main
     user gps
     group system inet net_raw
     ioprio be 0
+    setenv LD_SHIM_LIBS /system/bin/gpsd|libgps_shim.so
 
 # This will make sure that sdcard service starts as late_start.
 on nonencrypted

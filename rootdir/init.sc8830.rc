@@ -1,6 +1,7 @@
 import /init.board.rc
 import /init.sc8830.usb.rc
-import /init.sc8830_ss.rc
+import /init.core33g_base.rc
+import /init.wifi.rc
 
 on early-init
     mount debugfs debugfs /sys/kernel/debug
@@ -10,6 +11,7 @@ on early-init
 
     # coredump file will not be generated in release version
     write /proc/sys/kernel/core_pattern /dev/null
+
 # radio pipe
     mkdir /dev/rpipe 0550 radio radio
     pipe 666 /dev/rpipe/ril.vt.0
@@ -18,17 +20,6 @@ on early-init
 
 on init
     mkdir /productinfo 0771 system system
-    export LD_SHIM_LIBS /system/lib/hw/hwcomposer.sc8830.so|libmemoryheapion_sprd.so:/system/lib/hw/camera.sc8830.so|libmemoryheapion_sprd.so:/system/lib/libril.so|libril_shim.so:/system/bin/gpsd|libgps_shim.so
-
-    # See storage config details at https://source.android.com/devices/storage/
-
-    # Support legacy paths
-    symlink /sdcard /mnt/sdcard
-    symlink /sdcard /storage/sdcard0
-
-    # map "real" external storages paths also in same way. backwards compatibility.
-    symlink /storage/extSdCard /mnt/extSdCard
-    symlink /storage/usbdisk /mnt/usbdisk
 
 on fs
     mount_all /fstab.sc8830
@@ -47,15 +38,11 @@ on fs
 on post-fs
     chown system system /productinfo
     chmod 0771 /productinfo
-    insmod /system/lib/modules/mali.ko
 
 on post-fs-data
 
     # Set indication (checked by vold) that we have finished this action
     setprop vold.post_fs_data_done 1
-    #SPRD: Add support for install apk to internal sdcard @{
-    mkdir /data/internal-asec 0700 root root
-    # @}
 
 on early-boot
     # set RLIMIT_MEMLOCK to 64MB
@@ -145,15 +132,15 @@ on boot
     chown system system /sys/class/graphics/fb0/dynamic_mipi_clk
 
 on charger
-
     exec sfsck /dev/block/mmcblk0p23 ext4
-    mount ext4 /dev/block/mmcblk0p23 /system ro,barrier=1 wait
     exec sfsck /dev/block/mmcblk0p25 ext4
-    mount ext4 /dev/block/mmcblk0p25 /data noatime,nosuid,nodev,nomblk_io_submit wait,encryptable=footer,check
+    mount ext4 /dev/block/mmcblk0p25 /data noatime,nosuid,nodev wait,encryptable=footer,check
 
-    class_start core
-    start console
-    start slog
+service charger /sbin/healthd -c
+    class charger
+    group log
+    critical
+    seclabel u:r:healthd:s0
 
 service poweroffalarm /system/bin/poweroff_alarm
     disabled
@@ -236,11 +223,6 @@ service batterysrv /bin/batterysrv
     class core
     user system
     group system 
-    oneshot
-
-service charge /bin/charge
-    class charger
-    user root
     oneshot
 
 #nvitemd
@@ -333,28 +315,6 @@ service kill_w_phone /system/bin/ext_kill.sh  -w
     oneshot
 #kill lte app
 service kill_l_phone /system/bin/ext_kill.sh  -l
-    user root
-    disabled
-    oneshot
-
-#change owner
-service chown_service /system/bin/ext_chown.sh  -c
-    class main
-    user root
-    oneshot
-
-#set mac addr
-service set_mac /system/bin/ext_chown.sh  -e
-    user root
-    disabled
-    oneshot
-
-service  inputfreq  /system/bin/inputfreq.sh
-    user root
-    disabled
-    oneshot
-
-service  recoveryfreq  /system/bin/recoveryfreq.sh
     user root
     disabled
     oneshot
