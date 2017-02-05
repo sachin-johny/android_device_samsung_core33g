@@ -123,7 +123,7 @@ TARGET_NEEDS_PROP_INIT_HACK := true
 BOARD_HAS_DOWNLOAD_MODE := true
 TARGET_RECOVERY_PIXEL_FORMAT := "RGBX_8888"
 BOARD_SUPPRESS_EMMC_WIPE := true
-TARGET_RECOVERY_FSTAB := device/samsung/core33g/rootdir/recovery.fstab
+TARGET_RECOVERY_FSTAB := device/samsung/core33g/rootdir/fstab.sc8830
 
 # Assert
 TARGET_OTA_ASSERT_DEVICE := SM-G360H,SM-G360HU,core33g,core33gdd,core33gdx
