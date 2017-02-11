@@ -125,6 +125,9 @@ TARGET_RECOVERY_PIXEL_FORMAT := "RGBX_8888"
 BOARD_SUPPRESS_EMMC_WIPE := true
 TARGET_RECOVERY_FSTAB := device/samsung/core33g/rootdir/fstab.sc8830
 
+# Twrp
+TW_THEME := portrait_mdpi
+
 # Assert
 TARGET_OTA_ASSERT_DEVICE := SM-G360H,SM-G360HU,core33g,core33gdd,core33gdx
 
