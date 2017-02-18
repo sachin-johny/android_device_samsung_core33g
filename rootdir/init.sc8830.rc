@@ -12,12 +12,6 @@ on early-init
     # coredump file will not be generated in release version
     write /proc/sys/kernel/core_pattern /dev/null
 
-# radio pipe
-    mkdir /dev/rpipe 0550 radio radio
-    pipe 666 /dev/rpipe/ril.vt.0
-    pipe 666 /dev/rpipe/ril.vt.1
-    pipe 666 /dev/rpipe/ril.vt.2
-
 on init
     mkdir /productinfo 0771 system system
 
@@ -50,9 +44,9 @@ on early-boot
 
     # Support audio loopback test
     mkdir /dev/pipe 0755 system system
-    pipe 666 /dev/pipe/mmi.audio.ctrl
+    exec -- /system/bin/mknod -m 666 /dev/pipe/mmi.audio.ctrl p
     # Support audio parameter stored
-    mkdir /data/local/media 0771 media system
+    mkdir /data/local/media 0775 media system
 
     chmod 660 /proc/cpt/wdtirq
     chmod 660 /proc/cpt/stop
@@ -136,11 +130,8 @@ on charger
     exec sfsck /dev/block/mmcblk0p25 ext4
     mount ext4 /dev/block/mmcblk0p25 /data noatime,nosuid,nodev wait,encryptable=footer,check
 
-service charger /sbin/healthd -c
-    class charger
-    group log
-    critical
-    seclabel u:r:healthd:s0
+    start console
+    start slog
 
 service poweroffalarm /system/bin/poweroff_alarm
     disabled
@@ -191,6 +182,13 @@ on property:ro.config.ksm.support=true
     write /sys/kernel/mm/ksm/pages_to_scan 100
     write /sys/kernel/mm/ksm/sleep_millisecs 500
     write /sys/kernel/mm/ksm/run   1
+
+#modem_control
+service modem_control  /system/bin/modem_control
+    class core
+    user root
+    group system radio shell
+    oneshot
 
 service modemd /system/bin/modemd
     class core
