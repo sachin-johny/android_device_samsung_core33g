@@ -44,24 +44,12 @@ And for build rom, run this command in terminal from your working dir
 Good luck and Happy building. (^_^)/
 
 
-
 To apply patches 
-for example:  audio.patch
- got to frameworks/av  copy the patch in that directory and open 
+for example:  frameworks_base.patch
+ got to frameworks/base  copy the patch in that directory and open 
 terminal and run command 
 where 1st command is to apply patch and 
 the 2nd for to revert the patches which applied earlier
 
-		patch -p1 < audio.patch
-		patch -R -p1 <audio.patch
-
-# Patches for core33g
-
-* [external/tinyalsa](https://github.com/CyanogenMod/android_external_tinyalsa/compare/cm-13.0...ngoquang2708:cm-13.0.patch)
-* [frameworks/av](https://github.com/CyanogenMod/android_frameworks_av/compare/cm-13.0...ngoquang2708:cm-13.0.patch)
-* [frameworks/base](https://github.com/CyanogenMod/android_frameworks_base/compare/cm-13.0...ngoquang2708:cm-13.0.patch)
-* [frameworks/opt/telephony](https://github.com/CyanogenMod/android_frameworks_opt_telephony/compare/cm-13.0...ngoquang2708:cm-13.0.patch)
-* [hardware/libhardware](https://github.com/CyanogenMod/android_hardware_libhardware/compare/cm-13.0...ngoquang2708:cm-13.0.patch)
-* [system/core](https://github.com/CyanogenMod/android_system_core/compare/cm-13.0...ngoquang2708:cm-13.0.patch)
-* [system/media](https://github.com/CyanogenMod/android_system_media/compare/cm-13.0...ngoquang2708:cm-13.0.patch)
-* [build](https://github.com/CyanogenMod/android_build/compare/cm-13.0...ngoquang2708:cm-13.0.patch)
+		patch -p1 < frameworks_base.patch
+		patch -R -p1 < frameworks_base.patch
