@@ -96,7 +96,6 @@ PRODUCT_PACKAGES += \
 	audio.r_submix.default \
 	audio.usb.default \
 	libaudio-resampler \
-	libatchannel_wrapper \
 	libtinyalsa
 
 AUDIO_CONFIGS := \
