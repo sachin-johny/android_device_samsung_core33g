@@ -105,7 +105,7 @@ TARGET_HAS_BACKLIT_KEYS := false
 TARGET_SCREEN_HEIGHT := 800
 TARGET_SCREEN_WIDTH := 480
 
-# Media
+# Codecs
 COMMON_GLOBAL_CFLAGS += -DBOARD_CANT_REALLOCATE_OMX_BUFFERS
 
 # Enable WEBGL in WebKit
@@ -116,7 +116,6 @@ BOARD_HAL_STATIC_LIBRARIES := libhealthd.sc8830
 
 # Init
 TARGET_PROVIDES_INIT_RC := true
-TARGET_NEEDS_PROP_INIT_HACK := true
 
 # Recovery
 BOARD_HAS_DOWNLOAD_MODE := true
@@ -135,6 +134,7 @@ BOARD_USES_LEGACY_MMAP := true
 
 # Enable dex-preoptimization to speed up the first boot sequence
 WITH_DEXPREOPT := true
+WITH_DEXPREOPT_BOOT_IMG_ONLY := true
 WITH_DEXPREOPT_PIC := true
 WITH_DEXPREOPT_COMP := false
 
