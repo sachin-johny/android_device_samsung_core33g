@@ -37,7 +37,7 @@ import java.util.Arrays;
 import java.util.Collections;
 
 /**
- * Custom RIL to handle unique behavior of SPRD RIL
+ * Custom RIL for Galaxy CorePrime3g
  *
  * {@hide}
  */
@@ -111,6 +111,19 @@ public class core33gRIL extends SamsungSPRDRIL implements CommandsInterface {
     public core33gRIL(Context context, int preferredNetworkType,
             int cdmaSubscription, Integer instanceId) {
         super(context, preferredNetworkType, cdmaSubscription, instanceId);
+    }
+
+    // This thing... it causes lots of headaches due to RIL crashes
+    @Override
+    public void
+    getHardwareConfig (Message result) {
+        riljLog("Ignoring call to 'getHardwareConfig'");
+        if (result != null) {
+            CommandException ex = new CommandException(
+                CommandException.Error.REQUEST_NOT_SUPPORTED);
+            AsyncResult.forMessage(result, null, ex);
+            result.sendToTarget();
+        }
     }
 
     @Override
