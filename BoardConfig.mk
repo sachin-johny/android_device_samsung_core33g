@@ -18,6 +18,9 @@
 # Inherit from the proprietary version
 -include vendor/samsung/core33g/BoardConfigVendor.mk
 
+# Bootloader
+TARGET_BOOTLOADER_BOARD_NAME := sc7730s
+
 # Platform
 TARGET_ARCH := arm
 TARGET_BOARD_PLATFORM := sc8830
@@ -27,19 +30,16 @@ TARGET_ARCH_VARIANT := armv7-a-neon
 TARGET_CPU_VARIANT := cortex-a7
 TARGET_CPU_SMP := true
 ARCH_ARM_HAVE_TLS_REGISTER := true
-TARGET_BOOTLOADER_BOARD_NAME := sc7730s
-TARGET_GLOBAL_CFLAGS += -mtune=cortex-a7 -mfpu=neon -mfloat-abi=softfp
-TARGET_GLOBAL_CPPFLAGS += -mtune=cortex-a7 -mfpu=neon -mfloat-abi=softfp
+TARGET_NO_BOOTLOADER := true
 BOARD_VENDOR := samsung
 
-# Config u-boot
-TARGET_NO_BOOTLOADER := true
-
+# Partitions
 BOARD_BOOTIMAGE_PARTITION_SIZE := 16777216
 BOARD_RECOVERYIMAGE_PARTITION_SIZE := 16777216
 BOARD_SYSTEMIMAGE_PARTITION_SIZE := 1258291200
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 6094323712
 BOARD_CACHEIMAGE_PARTITION_SIZE := 209715200
+BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := ext4
 BOARD_FLASH_BLOCK_SIZE := 131072
 TARGET_USERIMAGES_USE_EXT4 := true
 TARGET_USERIMAGES_USE_F2FS := true
@@ -47,11 +47,12 @@ BOARD_HAS_LARGE_FILESYSTEM := true
 
 # Kernel
 BOARD_KERNEL_BASE := 0x00000000
-BOARD_KERNEL_CMDLINE := console=ttyS1,115200n8
 BOARD_KERNEL_PAGESIZE := 2048
 TARGET_KERNEL_CONFIG := cyanogen_core33g_defconfig
 TARGET_KERNEL_SOURCE := kernel/samsung/core33g
 BOARD_MKBOOTIMG_ARGS := --kernel_offset 0x00008000 --ramdisk_offset 0x01000000 --tags_offset 0x00000100 --dt device/samsung/core33g/dt.img
+TARGET_KERNEL_CROSS_COMPILE_PREFIX := arm-eabi-
+KERNEL_TOOLCHAIN := $(ANDROID_BUILD_TOP)/prebuilts/gcc/linux-x86/arm/arm-eabi-4.8/bin
 
 # RIL
 BOARD_RIL_CLASS += ../../../device/samsung/core33g/ril
@@ -61,6 +62,7 @@ COMMON_GLOBAL_CFLAGS += -DDISABLE_ASHMEM_TRACKING
 BOARD_HAVE_FM_BCM := true
 
 # Bluetooth
+USE_BLUETOOTH_BCM4343 := true
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/samsung/core33g/bluetooth
 BOARD_BLUEDROID_VENDOR_CONF := device/samsung/core33g/bluetooth/libbt_vndcfg.txt
 
@@ -82,14 +84,11 @@ WIFI_BAND := 802_11_ABG
 BOARD_HAVE_SAMSUNG_WIFI := true
 
 # Graphics
-HWUI_COMPILE_FOR_PERF := true
+BOARD_EGL_NEEDS_HANDLE_VALUE := true
 TARGET_REQUIRES_SYNCHRONOUS_SETSURFACE := true
 
 # HWComposer
 USE_SPRD_HWCOMPOSER := true
-USE_SPRD_DITHER := true
-USE_OVERLAY_COMPOSER_GPU := true
-TARGET_FORCE_HWC_FOR_VIRTUAL_DISPLAYS := true
 
 # Include an expanded selection of fonts
 EXTENDED_FONT_FOOTPRINT := true
@@ -101,40 +100,54 @@ TARGET_HAS_BACKLIT_KEYS := false
 TARGET_SCREEN_HEIGHT := 800
 TARGET_SCREEN_WIDTH := 480
 
-# Audio
-BOARD_USE_LIBATCHANNEL_WRAPPER := true
-
-# Media
-COMMON_GLOBAL_CFLAGS += -DBOARD_CANT_REALLOCATE_OMX_BUFFERS
+# Codecs
+BOARD_CANT_REALLOCATE_OMX_BUFFERS := true
 
 # Board specific features
-BOARD_USE_SAMSUNG_COLORFORMAT := true
-COMMON_GLOBAL_CFLAGS += -DUSE_LEGACY_BLOBS
+TARGET_HAS_LEGACY_CAMERA_HAL1 := true
 
 # healthd
 BOARD_HAL_STATIC_LIBRARIES := libhealthd.sc8830
 
-# Init
-TARGET_NR_SVC_SUPP_GIDS := 36
-TARGET_PROVIDES_INIT_RC := true
-TARGET_NEEDS_PROP_INIT_HACK := true
+# Use dmalloc() for such low memory devices like us
+MALLOC_SVELTE := true
+BOARD_USES_LEGACY_MMAP := true
 
-# Recovery
-BOARD_HAS_DOWNLOAD_MODE := true
-TARGET_RECOVERY_PIXEL_FORMAT := "RGBX_8888"
-BOARD_SUPPRESS_EMMC_WIPE := true
-TARGET_RECOVERY_FSTAB := device/samsung/core33g/rootdir/recovery.fstab
+# FM radio
+BOARD_HAVE_FM_BCM := true
+
+# Enable WEBGL in WebKit
+ENABLE_WEBGL := true
+
+# Bionic
+TARGET_NEEDS_PLATFORM_TEXT_RELOCATIONS := true
+
+# PowerHAL
+TARGET_POWERHAL_VARIANT := scx35
+
+# SELinux
+BOARD_SEPOLICY_DIRS += device/samsung/core33g/sepolicy
+
+# Init
+TARGET_UNIFIED_DEVICE := true
+TARGET_INIT_VENDOR_LIB := libinit_sec
 
 # Assert
 TARGET_OTA_ASSERT_DEVICE := SM-G360H,SM-G360HU,core33g,core33gdd,core33gdx
 
-# Memory
-MALLOC_IMPL := dlmalloc
+# Recovery
+TARGET_RECOVERY_FSTAB := device/samsung/core33g/rootdir/fstab.sc8830
+
+# System properties
+TARGET_SYSTEM_PROP += device/samsung/core33g/system.prop
 
 # Enable dex-preoptimization to speed up the first boot sequence
-WITH_DEXPREOPT := true
-WITH_DEXPREOPT_PIC := true
-WITH_DEXPREOPT_COMP := false
+#WITH_DEXPREOPT := true
+#WITH_DEXPREOPT_PIC := true
+#WITH_DEXPREOPT_COMP := false
+
+# Build system
+WITHOUT_CHECK_API := true
 
 # Charger
 BOARD_CHARGER_ENABLE_SUSPEND := true

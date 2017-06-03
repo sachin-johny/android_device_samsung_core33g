@@ -30,6 +30,7 @@ import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 
 import com.android.internal.telephony.uicc.SpnOverride;
+import com.android.internal.telephony.uicc.IccUtils;
 import com.android.internal.telephony.RILConstants;
 
 import java.util.ArrayList;
@@ -37,72 +38,11 @@ import java.util.Arrays;
 import java.util.Collections;
 
 /**
- * Custom RIL to handle unique behavior of SPRD RIL
+ * Custom RIL to handle unique behavior of core33g
  *
  * {@hide}
  */
 public class core33gRIL extends SamsungSPRDRIL implements CommandsInterface {
-
-    public static class TelephonyPropertyProvider implements TelephonyManager.TelephonyPropertyProvider {
-
-        public TelephonyPropertyProvider() { }
-
-        @Override
-        public void setTelephonyProperty(int phoneId, String property, String value) {
-            if (SubscriptionManager.isValidPhoneId(phoneId)) {
-                String actualProp = getActualProp(phoneId, property);
-                String propVal = value == null ? "" : value;
-                if (actualProp.length() > SystemProperties.PROP_NAME_MAX
-                        || propVal.length() > SystemProperties.PROP_VALUE_MAX) {
-                    Rlog.d(RILJ_LOG_TAG, "setTelephonyProperty: property to long" +
-                            " phoneId=" + phoneId +
-                            " property=" + property +
-                            " value=" + value +
-                            " actualProp=" + actualProp +
-                            " propVal" + propVal);
-                } else {
-                    Rlog.d(RILJ_LOG_TAG, "setTelephonyProperty: success" +
-                            " phoneId=" + phoneId +
-                            " property=" + property +
-                            " value=" + value +
-                            " actualProp=" + actualProp +
-                            " propVal=" + propVal);
-                    SystemProperties.set(actualProp, propVal);
-                }
-            } else {
-                Rlog.d(RILJ_LOG_TAG, "setTelephonyProperty: invalid phoneId=" + phoneId +
-                        " property=" + property +
-                        " value=" + value);
-            }
-        }
-
-        @Override
-        public String getTelephonyProperty(int phoneId, String property, String defaultVal) {
-            String result = defaultVal;
-            if (SubscriptionManager.isValidPhoneId(phoneId)) {
-                String actualProp = getActualProp(phoneId, property);
-                String propVal = SystemProperties.get(actualProp);
-                if (!propVal.isEmpty()) {
-                    result = propVal;
-                    Rlog.d(RILJ_LOG_TAG, "getTelephonyProperty: return result=" + result +
-                            " phoneId=" + phoneId +
-                            " property=" + property +
-                            " defaultVal=" + defaultVal +
-                            " actualProp=" + actualProp +
-                            " propVal=" + propVal);
-                }
-            } else {
-                Rlog.e(RILJ_LOG_TAG, "getTelephonyProperty: invalid phoneId=" + phoneId +
-                        " property=" + property +
-                        " defaultVal=" + defaultVal);
-            }
-            return result;
-        }
-
-        private String getActualProp(int phoneId, String prop) {
-            return phoneId <= 0 ? prop : prop + (phoneId + 1);
-        }
-    }
 
     public core33gRIL(Context context, int preferredNetworkType, int cdmaSubscription) {
         this(context, preferredNetworkType, cdmaSubscription, null);
@@ -120,6 +60,34 @@ public class core33gRIL extends SamsungSPRDRIL implements CommandsInterface {
             AsyncResult.forMessage(response, null, new CommandException(
                     CommandException.Error.REQUEST_NOT_SUPPORTED));
             response.sendToTarget();
+        }
+    }
+
+    @Override
+    public void setDataAllowed(boolean allowed, Message result) {
+        int simId = mInstanceId == null ? 0 : mInstanceId;
+        if (RILJ_LOGD) riljLog("setDataAllowed: allowed:" + allowed + " msg:" + result + " simId:" + simId);
+        if (allowed) {
+            invokeOemRilRequestRaw(new byte[] {(byte) 9, (byte) 4, (byte)(0 + simId)}, result);
+        } else {
+            if (result != null) {
+                // Fake the response since we are doing nothing to disallow mobile data
+                AsyncResult.forMessage(result, 0, null);
+                result.sendToTarget();
+            }
+        }
+    }
+
+    // This thing... it causes lots of headaches due to RIL crashes
+    @Override
+    public void
+    getHardwareConfig (Message result) {
+        riljLog("Ignoring call to 'getHardwareConfig'");
+        if (result != null) {
+            CommandException ex = new CommandException(
+                CommandException.Error.REQUEST_NOT_SUPPORTED);
+            AsyncResult.forMessage(result, null, ex);
+            result.sendToTarget();
         }
     }
 

@@ -18,7 +18,7 @@
 # In particular, you can add lunch options with the add_lunch_combo
 # function: add_lunch_combo generic-eng
 
-for rom in rr cm
+for rom in lineage
 do
   for targetBuildVariant in eng user userdebug
   do
