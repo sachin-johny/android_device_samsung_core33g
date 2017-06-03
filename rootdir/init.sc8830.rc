@@ -20,16 +20,6 @@ on early-init
 on init
     mkdir /productinfo 0771 system system
 
-    # See storage config details at https://source.android.com/devices/storage/
-
-    # Support legacy paths
-    symlink /sdcard /mnt/sdcard
-    symlink /sdcard /storage/sdcard0
-
-    # map "real" external storages paths also in same way. backwards compatibility.
-    symlink /storage/extSdCard /mnt/extSdCard
-    symlink /storage/usbdisk /mnt/usbdisk
-
 on fs
     mount_all /fstab.sc8830
     mount pstore pstore /sys/fs/pstore

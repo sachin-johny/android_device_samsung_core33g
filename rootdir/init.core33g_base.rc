@@ -22,6 +22,15 @@ on init
     mkdir /cache 0000 system system
     mkdir /efs 0774 system radio
 
+    # See storage config details at https://source.android.com/devices/storage/
+
+    # Support legacy paths
+    symlink /sdcard /storage/sdcard0
+
+    # map "real" external storages paths also in same way. backwards compatibility.
+    symlink /storage/extSdCard /mnt/extSdCard
+    symlink /storage/usbdisk /mnt/usbdisk
+
 # SecEDS
     setprop ro.SecEDS.enable false
 
