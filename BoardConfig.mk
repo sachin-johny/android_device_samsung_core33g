@@ -56,7 +56,7 @@ KERNEL_TOOLCHAIN := $(ANDROID_BUILD_TOP)/prebuilts/gcc/linux-x86/arm/arm-eabi-4.
 
 # RIL
 BOARD_RIL_CLASS += ../../../device/samsung/core33g/ril
-COMMON_GLOBAL_CFLAGS += -DDISABLE_ASHMEM_TRACKING
+BOARD_GLOBAL_CFLAGS += -DDISABLE_ASHMEM_TRACKING
 
 # FM radio
 BOARD_HAVE_FM_BCM := true
