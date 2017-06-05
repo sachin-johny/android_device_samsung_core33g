@@ -141,6 +141,9 @@ TARGET_RECOVERY_FSTAB := device/samsung/core33g/rootdir/fstab.sc8830
 # System properties
 TARGET_SYSTEM_PROP += device/samsung/core33g/system.prop
 
+# old kk format
+BLOCK_BASED_OTA := false
+
 # Enable dex-preoptimization to speed up the first boot sequence
 #WITH_DEXPREOPT := true
 #WITH_DEXPREOPT_PIC := true
