@@ -113,9 +113,6 @@ BOARD_HAL_STATIC_LIBRARIES := libhealthd.sc8830
 MALLOC_SVELTE := true
 BOARD_USES_LEGACY_MMAP := true
 
-# FM radio
-BOARD_HAVE_FM_BCM := true
-
 # Enable WEBGL in WebKit
 ENABLE_WEBGL := true
 

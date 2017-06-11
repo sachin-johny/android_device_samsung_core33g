@@ -26,9 +26,6 @@ $(call inherit-product, device/common/gps/gps_us_supl.mk)
 # Inherit from vendor tree
 $(call inherit-product-if-exists, vendor/samsung/core33g/core33g-vendor.mk)
 
-# WiFi
-$(call inherit-product, hardware/broadcom/wlan/bcmdhd/firmware/bcm4343/device-bcm.mk)
-
 # Overlays
 DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
 
@@ -45,30 +42,27 @@ PRODUCT_COPY_FILES += \
 TARGET_SCREEN_HEIGHT := 800
 TARGET_SCREEN_WIDTH := 480
 
-# Bluetooth config
-BLUETOOTH_CONFIGS := \
-	$(LOCAL_PATH)/configs/bluetooth/bt_vendor.conf
-
-PRODUCT_COPY_FILES += \
-	$(foreach f,$(BLUETOOTH_CONFIGS),$(f):system/etc/bluetooth/$(notdir $(f)))
-
 # Media config
 MEDIA_CONFIGS := \
-	$(LOCAL_PATH)/media/media_codecs.xml \
-	$(LOCAL_PATH)/media/media_profiles.xml \
 	frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml \
 	frameworks/av/media/libstagefright/data/media_codecs_google_video.xml \
 	frameworks/av/media/libstagefright/data/media_codecs_google_telephony.xml
 
 PRODUCT_COPY_FILES += \
-	$(foreach f,$(MEDIA_CONFIGS),$(f):system/etc/$(notdir $(f)))
+	$(foreach f,$(MEDIA_XML_CONFIGS),$(f):system/etc/$(notdir $(f)))
 
 PRODUCT_COPY_FILES += \
 	$(LOCAL_PATH)/media/mediaserver.rc:system/etc/init/mediaserver.rc
 
+PRODUCT_PACKAGES += \
+	media_codecs.xml \
+	media_profiles.xml
+
 # Bluetooth
 PRODUCT_PACKAGES += \
-	libbluetooth_jni
+	bt_vendor.conf \
+	libbluetooth_jni \
+	bluetooth.default
 
 # HWC
 PRODUCT_PACKAGES += \
@@ -95,10 +89,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
 	lights.sc8830
 
-# Bluetooth
-PRODUCT_PACKAGES += \
-	bluetooth.default
-
 # Audio
 PRODUCT_PACKAGES += \
 	audio_hw.xml \
@@ -110,16 +100,6 @@ PRODUCT_PACKAGES += \
 	libaudio-resampler \
 	libatchannel_wrapper
 
-AUDIO_CONFIGS := \
-	$(LOCAL_PATH)/configs/audio/audio_policy.conf \
-	$(LOCAL_PATH)/configs/audio/audio_hw.xml \
-	$(LOCAL_PATH)/configs/audio/audio_para \
-	$(LOCAL_PATH)/configs/audio/codec_pga.xml \
-    $(LOCAL_PATH)/configs/audio/tiny_hw.xml
-
-PRODUCT_COPY_FILES += \
-	$(foreach f,$(AUDIO_CONFIGS),$(f):system/etc/$(notdir $(f))) \
-
 # Common libs
 PRODUCT_PACKAGES += \
 	libstlport \
@@ -128,39 +108,31 @@ PRODUCT_PACKAGES += \
 	libgps_shim
 
 # Rootdir files
-ROOTDIR_FILES := \
-	$(LOCAL_PATH)/rootdir/init.board.rc \
-	$(LOCAL_PATH)/rootdir/init.sc8830.rc \
-	$(LOCAL_PATH)/rootdir/init.sc8830.usb.rc \
-	$(LOCAL_PATH)/rootdir/init.core33g_base.rc \
-	$(LOCAL_PATH)/rootdir/init.wifi.rc \
-	$(LOCAL_PATH)/rootdir/ueventd.sc8830.rc \
-	$(LOCAL_PATH)/rootdir/fstab.sc8830
-
-PRODUCT_COPY_FILES += \
-	$(foreach f,$(ROOTDIR_FILES),$(f):root/$(notdir $(f)))
+PRODUCT_PACKAGES += \
+	fstab.sc8830 \
+	init.board.rc \
+	init.core33g_base.rc \
+	init.sc8830.rc \
+	init.sc8830.usb.rc \
+	init.wifi.rc \
+	ueventd.sc8830.rc
 
 # GPS
-GPS_CONFIGS := \
-	$(LOCAL_PATH)/configs/gps/gps.xml \
-
-PRODUCT_COPY_FILES += \
-	$(foreach f,$(GPS_CONFIGS),$(f):system/etc/$(notdir $(f)))
+PRODUCT_PACKAGES += \
+	gps.xml
 
 # FM radio
 PRODUCT_PACKAGES += \
 	fm.sc8830
 
 # Wifi
+$(call inherit-product, hardware/broadcom/wlan/bcmdhd/firmware/bcm4343/device-bcm.mk)
+
 PRODUCT_PACKAGES += \
-	macloader
-
-WIFI_CONFIGS := \
-	$(LOCAL_PATH)/configs/wifi/nvram_net.txt \
-	$(LOCAL_PATH)/configs/wifi/nvram_mfg.txt
-
-PRODUCT_COPY_FILES += \
-	$(foreach f,$(WIFI_CONFIGS),$(f):system/etc/wifi/$(notdir $(f)))
+	macloader \
+	wpa_supplicant.conf \
+	nvram_net.txt \
+	nvram_mfg.txt
 
 # PowerHAL
 PRODUCT_PACKAGES += \
@@ -186,31 +158,28 @@ PRODUCT_COPY_FILES += \
 	$(foreach f,$(PERMISSIONS_XML_FILES),$(f):system/etc/permissions/$(notdir $(f)))
 
 # System init .rc files
-SYSTEM_INIT_RC_FILES := \
-	$(LOCAL_PATH)/system/etc/init/at_distributor.rc \
-	$(LOCAL_PATH)/system/etc/init/chown_service.rc \
-	$(LOCAL_PATH)/system/etc/init/data.rc \
-	$(LOCAL_PATH)/system/etc/init/dns.rc \
-	$(LOCAL_PATH)/system/etc/init/engpc.rc \
-	$(LOCAL_PATH)/system/etc/init/gpsd.rc \
-	$(LOCAL_PATH)/system/etc/init/hostapd.rc \
-	$(LOCAL_PATH)/system/etc/init/kill_phone.rc \
-	$(LOCAL_PATH)/system/etc/init/macloader.rc \
-	$(LOCAL_PATH)/system/etc/init/mediacodec.rc \
-	$(LOCAL_PATH)/system/etc/init/modem_control.rc \
-	$(LOCAL_PATH)/system/etc/init/modemd.rc \
-	$(LOCAL_PATH)/system/etc/init/nvitemd.rc \
-	$(LOCAL_PATH)/system/etc/init/p2p_supplicant.rc \
-	$(LOCAL_PATH)/system/etc/init/phoneserver.rc \
-	$(LOCAL_PATH)/system/etc/init/refnotify.rc \
-	$(LOCAL_PATH)/system/etc/init/rild.rc \
-	$(LOCAL_PATH)/system/etc/init/set_mac.rc \
-	$(LOCAL_PATH)/system/etc/init/smd_symlink.rc \
-	$(LOCAL_PATH)/system/etc/init/swap.rc \
-	$(LOCAL_PATH)/system/etc/init/wpa_supplicant.rc \
-
-PRODUCT_COPY_FILES += \
-	$(foreach f,$(SYSTEM_INIT_RC_FILES),$(f):system/etc/init/$(notdir $(f)))
+PRODUCT_PACKAGES += \
+	at_distributor.rc \
+	chown_service.rc \
+	data.rc \
+	dns.rc \
+	engpc.rc \
+	gpsd.rc \
+	hostapd.rc \
+	kill_phone.rc \
+	macloader.rc \
+	mediacodec.rc \
+	modem_control.rc \
+	modemd.rc \
+	nvitemd.rc \
+	p2p_supplicant.rc \
+	phoneserver.rc \
+	refnotify.rc \
+	rild.rc \
+	set_mac.rc \
+	smd_symlink.rc \
+	swap.rc \
+	wpa_supplicant.rc
 
 # Camera config
 PRODUCT_PROPERTY_OVERRIDES += \

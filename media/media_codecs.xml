@@ -47,7 +47,6 @@
         </MediaCodec>
 
         <MediaCodec name="OMX.sprd.aac.decoder" type="audio/mp4a-latm" />
-
     </Decoders>
 
     <Encoders>
@@ -57,7 +56,7 @@
     </Encoders>
 
     <Include href="media_codecs_google_audio.xml" />
-    <Include href="media_codecs_google_video.xml" />
+    <Include href="media_codecs_google_video_le.xml" />
     <Include href="media_codecs_google_telephony.xml" />
     <Include href="media_codecs_ffmpeg.xml" />
 </MediaCodecs>

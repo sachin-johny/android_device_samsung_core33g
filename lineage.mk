@@ -1,3 +1,5 @@
+LOCAL_PATH := device/samsung/core33g
+
 ## Specify phone tech before including full_phone	
 $(call inherit-product, vendor/cm/config/telephony.mk)
 
