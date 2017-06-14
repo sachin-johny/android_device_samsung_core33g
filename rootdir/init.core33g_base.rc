@@ -11,6 +11,16 @@ on init
     # Support Preload install apks
     mkdir /preload 0771 system system
 	
+    # See storage config details at https://source.android.com/devices/storage/
+
+    # Support legacy paths
+    symlink /sdcard /mnt/sdcard
+    symlink /sdcard /storage/sdcard0
+
+    # map "real" external storages paths also in same way. backwards compatibility.
+    symlink /storage/extSdCard /mnt/extSdCard
+    symlink /storage/usbdisk /mnt/usbdisk
+
     #thermistor
     chown radio system /sys/class/sec/sec-thermistor/temp_adc
     chown radio system /sys/class/sec/sec-thermistor/temperature
@@ -21,15 +31,6 @@ on init
 	
     mkdir /cache 0000 system system
     mkdir /efs 0774 system radio
-
-    # See storage config details at https://source.android.com/devices/storage/
-
-    # Support legacy paths
-    symlink /sdcard /storage/sdcard0
-
-    # map "real" external storages paths also in same way. backwards compatibility.
-    symlink /storage/extSdCard /mnt/extSdCard
-    symlink /storage/usbdisk /mnt/usbdisk
 
 # SecEDS
     setprop ro.SecEDS.enable false
@@ -390,6 +391,11 @@ on property:dev.bootcomplete=1
 on property:persist.sys.storage_preload=1
     mount ext4 /dev/block/mmcblk0p19 /preload nosuid nodev noatime wait ro
     setprop storage.preload.complete 1
+
+# umount service
+service umount_service /system/bin/umount /preload
+    disabled
+    oneshot
 
 on property:persist.sys.storage_preload=0
     start umount_service
