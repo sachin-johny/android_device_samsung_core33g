@@ -16,6 +16,3 @@
 
 # VOLD
 /devices/sprd-sdhci.0/mmc_host/mmc1*		  auto         auto defaults										voldmanaged=extSdCard:auto,encryptable=userdata
-
-# zRAM
-/dev/block/zram0			 				  auto         auto defaults										zramstreams=4,notrim
