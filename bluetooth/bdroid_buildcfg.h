@@ -18,5 +18,6 @@
 #define _BDROID_BUILDCFG_H
 
 #define BTM_DEF_LOCAL_NAME   "SM-G360H"
-
+#define MAX_ACL_CONNECTIONS   7
+#define BT_CLEAN_TURN_ON_DISABLED TRUE
 #endif
