@@ -91,7 +91,6 @@ TARGET_RUNNING_WITHOUT_SYNC_FRAMEWORK := true
 
 # HWComposer
 USE_SPRD_HWCOMPOSER := true
-USE_OVERLAY_COMPOSER_GPU := true
 
 # Include an expanded selection of fonts
 EXTENDED_FONT_FOOTPRINT := true
