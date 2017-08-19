@@ -126,8 +126,8 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
 	fm.sc8830
 
-# Wifi
-$(call inherit-product, hardware/broadcom/wlan/bcmdhd/firmware/bcm4343/device-bcm.mk)
+# WiFi
+$(call inherit-product, hardware/broadcom/wlan/bcmdhd/config/config-bcm.mk)
 
 PRODUCT_PACKAGES += \
 	macloader \
