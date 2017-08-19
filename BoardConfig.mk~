@@ -51,7 +51,7 @@ BOARD_RAMDISK_OFFSET := 0x01000000
 BOARD_KERNEL_PAGESIZE := 2048
 BOARD_MKBOOTIMG_ARGS := --kernel_offset 0x00008000
 BOARD_KERNEL_SEPARATED_DT := true
-TARGET_KERNEL_CONFIG := cyanogen_core33g_defconfig
+TARGET_KERNEL_CONFIG := lineage_core33g_defconfig
 TARGET_KERNEL_SOURCE := kernel/samsung/core33g
 TARGET_KERNEL_CROSS_COMPILE_PREFIX := arm-eabi-
 KERNEL_TOOLCHAIN := $(ANDROID_BUILD_TOP)/prebuilts/gcc/linux-x86/arm/arm-eabi-4.8/bin
@@ -87,6 +87,7 @@ TARGET_REQUIRES_SYNCHRONOUS_SETSURFACE := true
 NUM_FRAMEBUFFER_SURFACE_BUFFRRS := 3
 TARGET_RUNNING_WITHOUT_SYNC_FRAMEWORK := true
 
+<<<<<<< HEAD
 # HWComposer
 USE_SPRD_HWCOMPOSER := true
 
@@ -95,6 +96,11 @@ EXTENDED_FONT_FOOTPRINT := true
 
 # Lights
 TARGET_HAS_BACKLIT_KEYS := false
+=======
+# Kernel
+TARGET_KERNEL_CONFIG := cyanogen_core33g_defconfig
+TARGET_KERNEL_SOURCE := kernel/samsung/core33g
+>>>>>>> 9702a2d... BoardConfig: Cleanup a bit
 
 # Resolution
 TARGET_SCREEN_HEIGHT := 800
