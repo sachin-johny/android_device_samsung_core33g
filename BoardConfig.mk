@@ -28,8 +28,6 @@ TARGET_CPU_ABI := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
 TARGET_ARCH_VARIANT := armv7-a-neon
 TARGET_CPU_VARIANT := cortex-a7
-TARGET_CPU_SMP := true
-ARCH_ARM_HAVE_TLS_REGISTER := true
 TARGET_NO_BOOTLOADER := true
 BOARD_VENDOR := samsung
 
@@ -53,8 +51,6 @@ BOARD_RAMDISK_OFFSET := 0x01000000
 BOARD_KERNEL_PAGESIZE := 2048
 BOARD_MKBOOTIMG_ARGS := --kernel_offset 0x00008000
 BOARD_KERNEL_SEPARATED_DT := true
-TARGET_KERNEL_ARCH := arm
-TARGET_KERNEL_HEADER_ARCH := arm
 TARGET_KERNEL_CONFIG := cyanogen_core33g_defconfig
 TARGET_KERNEL_SOURCE := kernel/samsung/core33g
 TARGET_KERNEL_CROSS_COMPILE_PREFIX := arm-eabi-
@@ -116,10 +112,6 @@ TARGET_HAS_LEGACY_CAMERA_HAL1 := true
 
 # healthd
 BOARD_HAL_STATIC_LIBRARIES := libhealthd.sc8830
-
-# Use dmalloc() for such low memory devices like us
-MALLOC_SVELTE := true
-BOARD_USES_LEGACY_MMAP := true
 
 # Enable WEBGL in WebKit
 ENABLE_WEBGL := true
