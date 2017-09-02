@@ -37,7 +37,7 @@ import java.util.Arrays;
 import java.util.Collections;
 
 /**
- * Custom RIL to handle unique behavior of SPRD RIL
+ * Custom RIL to handle unique behavior of Core33g
  *
  * {@hide}
  */
@@ -137,7 +137,6 @@ public class core33gRIL extends SamsungSPRDRIL implements CommandsInterface {
     }
 
     @Override
-
     public void setDataAllowed(boolean allowed, Message result) {
         int simId = mInstanceId == null ? 0 : mInstanceId;
         if (RILJ_LOGD) riljLog("setDataAllowed: allowed:" + allowed + " msg:" + result + " simId:" + simId);
