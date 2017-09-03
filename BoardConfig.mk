@@ -57,6 +57,9 @@ BOARD_MKBOOTIMG_ARGS := --kernel_offset 0x00008000 --ramdisk_offset 0x01000000 -
 BOARD_RIL_CLASS += ../../../device/samsung/core33g/ril
 COMMON_GLOBAL_CFLAGS += -DDISABLE_ASHMEM_TRACKING
 
+# PowerHAL
+TARGET_POWERHAL_VARIANT := scx35
+
 # FM radio
 BOARD_HAVE_FM_BCM := true
 
