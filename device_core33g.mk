@@ -85,6 +85,14 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
 	SamsungServiceMode
 
+# PowerHAL
+PRODUCT_PACKAGES += \
+	power.sc8830
+
+# SamsungDoze
+PRODUCT_PACKAGES += \
+	SamsungDoze
+
 # Bluetooth
 PRODUCT_PACKAGES += \
 	bluetooth.default \
