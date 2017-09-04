@@ -137,22 +137,6 @@ public class core33gRIL extends SamsungSPRDRIL implements CommandsInterface {
     }
 
     @Override
-    public void setDataAllowed(boolean allowed, Message result) {
-        int simId = mInstanceId == null ? 0 : mInstanceId;
-        if (RILJ_LOGD) riljLog("setDataAllowed: allowed:" + allowed + " msg:" + result + " simId:" + simId);
-        if (allowed) {
-            invokeOemRilRequestRaw(new byte[] {(byte) 9, (byte) 4, (byte)(0 + simId)}, result);
-        } else {
-            if (result != null) {
-                // Fake the response since we are doing nothing to disallow mobile data
-                AsyncResult.forMessage(result, 0, null);
-                result.sendToTarget();
-            }
-        }
-    }
-
-
-    @Override
     protected Object
     responseCallList(Parcel p) {
         int num;
