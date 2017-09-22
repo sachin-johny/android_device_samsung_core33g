@@ -41,7 +41,7 @@ service iprenew_bt-pan /system/bin/dhcpcd -n
 service engpcclientw /system/bin/engpc -t 0 -a /dev/ttyGS0 -d /dev/ttyGS1
     class core
     user system
-    group system radio shell
+    group media system radio shell
     disabled
     oneshot
 

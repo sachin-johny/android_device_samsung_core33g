@@ -60,7 +60,7 @@ on early-boot
     mkdir /dev/pipe 0755 system system
     exec -- /system/bin/mknod -m 666 /dev/pipe/mmi.audio.ctrl p
     # Support audio parameter stored
-    mkdir /data/local/media 0771 media system
+    mkdir /data/local/media 0771 media media
 
     chmod 660 /proc/cpt/wdtirq
     chmod 660 /proc/cpt/stop
