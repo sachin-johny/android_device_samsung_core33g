@@ -111,10 +111,10 @@ AUDIO_CONFIGS := \
 	$(LOCAL_PATH)/configs/audio/audio_hw.xml \
 	$(LOCAL_PATH)/configs/audio/audio_para \
 	$(LOCAL_PATH)/configs/audio/codec_pga.xml \
-        $(LOCAL_PATH)/configs/audio/tiny_hw.xml \
+    $(LOCAL_PATH)/configs/audio/tiny_hw.xml
 
 PRODUCT_COPY_FILES += \
-	$(foreach f,$(AUDIO_CONFIGS),$(f):system/etc/$(notdir $(f))) \
+	$(foreach f,$(AUDIO_CONFIGS),$(f):system/etc/$(notdir $(f)))
 
 # Common libs
 PRODUCT_PACKAGES += \
@@ -168,14 +168,6 @@ PERMISSION_XML_FILES := \
 
 PRODUCT_COPY_FILES += \
 	$(foreach f,$(PERMISSION_XML_FILES),$(f):system/etc/permissions/$(notdir $(f)))
-
-# Scripts
-SCRIPTS_FILES := \
-	$(LOCAL_PATH)/scripts/set_freq.sh \
-	$(LOCAL_PATH)/scripts/zram.sh
-
-PRODUCT_COPY_FILES += \
-	$(foreach f,$(SCRIPTS_FILES),$(f):system/bin/$(notdir $(f)))
 
 # Set default USB interface
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
