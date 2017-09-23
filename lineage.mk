@@ -1,13 +1,13 @@
 LOCAL_PATH := device/samsung/core33g
 
-## Specify phone tech before including full_phone	
-$(call inherit-product, vendor/cm/config/telephony.mk)
+## Specify phone tech before including full_phone
+$(call inherit-product, vendor/lineage/config/telephony.mk)
 
 # Release name
 PRODUCT_RELEASE_NAME := core33g
 
 # Inherit some common CM stuff.
-$(call inherit-product, vendor/cm/config/common_full_phone.mk)
+$(call inherit-product, vendor/lineage/config/common_full_phone.mk)
 
 # Inherit device configuration
 $(call inherit-product, $(LOCAL_PATH)/core33g.mk)
