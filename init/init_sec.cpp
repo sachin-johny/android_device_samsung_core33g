@@ -33,6 +33,8 @@
 #include "property_service.h"
 #include "vendor_init.h"
 
+#include "log.h"
+
 namespace android {
 namespace init {
 
@@ -127,11 +129,11 @@ void vendor_load_properties()
 		fclose(file);
 	} else {
 		// If can't open /proc/simslot_count, print an error!
-		ERROR("Could not open '%s'\n", simslot_count_path);
+		LOG(ERROR) << "Could not open " << simslot_count_path << "\n";
 	}
 
 	std::string device = android::base::GetProperty("ro.product.device", "");
-	ERROR("Found bootloader id %s setting build properties for %s device\n", bootloader.c_str(), device.c_str());
+	LOG(ERROR) << "Found bootloader id " << bootloader.c_str() << " setting build properties for " << device.c_str() << " device\n";
 }
 
 }  // namespace init
