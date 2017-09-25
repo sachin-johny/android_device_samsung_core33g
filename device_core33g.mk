@@ -53,10 +53,12 @@ PRODUCT_PACKAGES += \
 	gralloc.sc8830 \
 	hwcomposer.sc8830 \
 	sprd_gsp.sc8830 \
-	libion_sprd
+	libion_sprd \
+	libmemoryheapion_sprd
 
 # Codecs
 PRODUCT_PACKAGES += \
+	libcolorformat_switcher \
 	libstagefrighthw \
 	libstagefright_sprd_mpeg4dec \
 	libstagefright_sprd_soft_mpeg4dec \
@@ -101,10 +103,7 @@ PRODUCT_PACKAGES += \
 # Audio
 PRODUCT_PACKAGES += \
 	audio.primary.sc8830 \
-	audio.r_submix.default \
-	audio.usb.default \
-	libaudio-resampler \
-	libtinyalsa
+	libaudio-resampler
 
 AUDIO_CONFIGS := \
 	$(LOCAL_PATH)/configs/audio/audio_policy.conf \
@@ -115,6 +114,10 @@ AUDIO_CONFIGS := \
 
 PRODUCT_COPY_FILES += \
 	$(foreach f,$(AUDIO_CONFIGS),$(f):system/etc/$(notdir $(f)))
+
+# Memtrack
+PRODUCT_PACKAGES += \
+	memtrack.sc8830
 
 # Common libs
 PRODUCT_PACKAGES += \
@@ -150,28 +153,15 @@ PRODUCT_PACKAGES += \
 
 # Permissions
 PERMISSION_XML_FILES := \
-	frameworks/native/data/etc/handheld_core_hardware.xml \
 	frameworks/native/data/etc/android.hardware.camera.flash-autofocus.xml \
 	frameworks/native/data/etc/android.hardware.camera.front.xml \
 	frameworks/native/data/etc/android.hardware.camera.xml \
-	frameworks/native/data/etc/android.hardware.bluetooth_le.xml \
 	frameworks/native/data/etc/android.hardware.location.gps.xml \
-	frameworks/native/data/etc/android.hardware.sensor.accelerometer.xml \
-	frameworks/native/data/etc/android.hardware.touchscreen.multitouch.xml \
-	frameworks/native/data/etc/android.hardware.touchscreen.xml \
-	frameworks/native/data/etc/android.hardware.telephony.gsm.xml \
-	frameworks/native/data/etc/android.hardware.usb.accessory.xml \
-	frameworks/native/data/etc/android.software.sip.voip.xml \
-	frameworks/native/data/etc/android.software.sip.xml \
-	frameworks/native/data/etc/android.hardware.wifi.xml \
-	frameworks/native/data/etc/android.hardware.wifi.direct.xml
+	frameworks/native/data/etc/android.hardware.sensor.proximity.xml \
+	frameworks/native/data/etc/android.hardware.sensor.accelerometer.xml
 
 PRODUCT_COPY_FILES += \
 	$(foreach f,$(PERMISSION_XML_FILES),$(f):system/etc/permissions/$(notdir $(f)))
-
-# Set default USB interface
-PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-	persist.sys.usb.config=mtp
 
 # Device props
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -182,9 +172,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # ART device props
 PRODUCT_PROPERTY_OVERRIDES += \
 	ro.sys.fw.dex2oat_thread_count=4 \
-	dalvik.vm.dex2oat-flags=--no-watch-dog \
-	dalvik.vm.dex2oat-filter=interpret-only \
-	dalvik.vm.image-dex2oat-filter=speed
+	dalvik.vm.dex2oat-flags=--no-watch-dog
 
 # Support for Browser's saved page feature. This allows
 # for pages saved on previous versions of the OS to be

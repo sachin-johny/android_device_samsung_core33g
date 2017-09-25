@@ -1,6 +1,3 @@
-#
-# system.prop for core33g
-#
 ro.sf.lcd_density=240
 ro.sf.lcd_width=154
 ro.sf.lcd_height=90
