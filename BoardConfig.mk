@@ -123,7 +123,7 @@ TARGET_NEEDS_PLATFORM_TEXT_RELOCATIONS := true
 TARGET_POWERHAL_VARIANT := scx35
 
 # SELinux
-BOARD_SEPOLICY_DIRS += device/samsung/core33g/sepolicy
+#BOARD_SEPOLICY_DIRS += device/samsung/core33g/sepolicy
 
 # Init
 TARGET_UNIFIED_DEVICE := true
