@@ -92,7 +92,7 @@ NUM_FRAMEBUFFER_SURFACE_BUFFRRS := 3
 TARGET_RUNNING_WITHOUT_SYNC_FRAMEWORK := true
 
 # HWComposer
-USE_SPRD_HWCOMPOSER := true
+#USE_SPRD_HWCOMPOSER := true
 
 # Include an expanded selection of fonts
 EXTENDED_FONT_FOOTPRINT := true
