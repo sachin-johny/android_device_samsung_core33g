@@ -1,0 +1,26 @@
+From dede2a698bf0da370c78c3127b66a66abb341f9c Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Ng=C3=B4=20Minh=20Quang?= <ngoquang2708@gmail.com>
+Date: Mon, 23 May 2016 18:35:09 +0700
+Subject: [PATCH 1/2] gralloc: add support for SPRD's private usages
+
+---
+ include/hardware/gralloc.h | 6 ++++++
+ 1 file changed, 6 insertions(+)
+
+diff --git a/include/hardware/gralloc.h b/include/hardware/gralloc.h
+index 07ac0290..6a293f5a 100644
+--- a/include/hardware/gralloc.h
++++ b/include/hardware/gralloc.h
+@@ -156,6 +156,12 @@ enum {
+     /* SEC Private usage , for Overlay path at HWC */
+     GRALLOC_USAGE_HWC_HWOVERLAY         = 0x20000000,
+ #endif
++
++#ifdef SPRD_HARDWARE
++    GRALLOC_USAGE_OVERLAY_BUFFER        =  0x01000000,
++    GRALLOC_USAGE_VIDEO_BUFFER          =  0x02000000,
++    GRALLOC_USAGE_CAMERA_BUFFER         =  0x04000000,
++#endif
+ };
+ 
+ /*****************************************************************************/
