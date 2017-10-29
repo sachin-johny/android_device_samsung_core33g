@@ -60,9 +60,6 @@ KERNEL_TOOLCHAIN := $(ANDROID_BUILD_TOP)/prebuilts/gcc/linux-x86/arm/arm-eabi-4.
 BOARD_RIL_CLASS += ../../../device/samsung/core33g/ril
 BOARD_GLOBAL_CFLAGS += -DDISABLE_ASHMEM_TRACKING
 
-# FM radio
-BOARD_HAVE_FM_BCM := true
-
 # Bluetooth
 USE_BLUETOOTH_BCM4343 := true
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/samsung/core33g/bluetooth
@@ -116,9 +113,6 @@ TARGET_HAS_LEGACY_CAMERA_HAL1 := true
 # healthd
 BOARD_HAL_STATIC_LIBRARIES := libhealthd.sc8830
 
-# Enable WEBGL in WebKit
-ENABLE_WEBGL := true
-
 # Bionic
 TARGET_NEEDS_PLATFORM_TEXT_RELOCATIONS := true
 
@@ -141,13 +135,11 @@ TARGET_RECOVERY_FSTAB := device/samsung/core33g/rootdir/fstab.sc8830
 # System properties
 TARGET_SYSTEM_PROP += device/samsung/core33g/system.prop
 
-# Enable dex-preoptimization to speed up the first boot sequence
-#WITH_DEXPREOPT := true
-#WITH_DEXPREOPT_PIC := true
-#WITH_DEXPREOPT_COMP := false
-
 # Build system
 WITHOUT_CHECK_API := true
+
+# Malloc implementation
+MALLOC_SVELTE := true
 
 # Charger
 BOARD_CHARGER_ENABLE_SUSPEND := true

@@ -99,8 +99,7 @@ PRODUCT_PACKAGES += \
 	codec_pga.xml \
 	tiny_hw.xml \
 	audio.primary.sc8830 \
-	libaudio-resampler \
-	libatchannel_wrapper
+	libaudio-resampler
 
 # Common libs
 PRODUCT_PACKAGES += \
@@ -143,7 +142,6 @@ PRODUCT_PACKAGES += \
 # Packages
 PRODUCT_PACKAGES += \
 	SamsungDoze \
-	Gello \
 	Snap
 
 # Permissions
