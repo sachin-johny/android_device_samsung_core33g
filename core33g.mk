@@ -141,10 +141,10 @@ PRODUCT_PACKAGES += \
 	power.sc8830
 
 # Packages
-#PRODUCT_PACKAGES += \
-#	SamsungDoze \
-#	Gello \
-#	Snap
+PRODUCT_PACKAGES += \
+	SamsungDoze \
+	Gello \
+	Snap
 
 # Permissions
 PERMISSIONS_XML_FILES := \
@@ -206,8 +206,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
 	ro.com.google.networklocation=1
 
 # Dalvik heap config
-$(call inherit-product, frameworks/native/build/phone-xhdpi-1024-dalvik-heap.mk)
-#$(call inherit-product, frameworks/native/build/phone-xxhdpi-2048-hwui-memory.mk)
+$(call inherit-product, frameworks/native/build/phone-hdpi-2048-dalvik-heap.mk)
+$(call inherit-product, frameworks/native/build/phone-xxhdpi-2048-hwui-memory.mk)
 
 # For userdebug builds
 ADDITIONAL_DEFAULT_PROPERTIES += \
