@@ -210,7 +210,7 @@ $(call inherit-product, frameworks/native/build/phone-xhdpi-1024-dalvik-heap.mk)
 #$(call inherit-product, frameworks/native/build/phone-xxhdpi-2048-hwui-memory.mk)
 
 # For userdebug builds
-PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
+ADDITIONAL_DEFAULT_PROPERTIES += \
 	ro.secure=0 \
 	ro.adb.secure=0 \
 	ro.debuggable=1 \
