@@ -167,6 +167,7 @@ PRODUCT_PACKAGES += \
 	dns.rc \
 	engpc.rc \
 	gpsd.rc \
+	healthd.rc \
 	hostapd.rc \
 	kill_phone.rc \
 	macloader.rc \
