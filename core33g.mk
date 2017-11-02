@@ -55,6 +55,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
 	libwifi-hal-bcm
 
+# RIL
+PRODUCT_PACKAGES += \
+	libril
+
 # Set those variables here to overwrite the inherited values.
 PRODUCT_NAME := full_core33g
 PRODUCT_DEVICE := core33g

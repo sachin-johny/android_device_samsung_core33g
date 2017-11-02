@@ -62,3 +62,6 @@ TARGET_SCREEN_WIDTH := 480
 # Assert
 TARGET_OTA_ASSERT_DEVICE := SM-G360H,SM-G360HU,core33g,core33gdd,core33gdx
 
+# RIL
+TARGET_SPECIFIC_HEADER_PATH := device/samsung/core33g/include
+SIM_COUNT := 2
