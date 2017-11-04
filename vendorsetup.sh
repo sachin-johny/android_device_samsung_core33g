@@ -21,7 +21,7 @@
 # Patch the source first
 sh device/samsung/core33g/patches/apply.sh
 
-for rom in lineage
+for rom in lineage cos
 do
   for targetBuildVariant in eng user userdebug
   do
