@@ -143,7 +143,6 @@ PRODUCT_PACKAGES += \
 
 # Packages
 PRODUCT_PACKAGES += \
-	SamsungDoze \
 	Snap
 
 # Permissions
