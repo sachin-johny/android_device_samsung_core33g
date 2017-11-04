@@ -120,7 +120,9 @@ PRODUCT_PACKAGES += \
 
 # GPS
 PRODUCT_PACKAGES += \
-	gps.xml
+	gps.xml \
+	libgpspc \
+	libefuse
 
 # FM radio
 PRODUCT_PACKAGES += \
