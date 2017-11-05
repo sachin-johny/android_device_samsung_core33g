@@ -51,7 +51,6 @@ KERNEL_TOOLCHAIN := $(ANDROID_BUILD_TOP)/prebuilts/gcc/linux-x86/arm/arm-eabi-4.
 
 # Recovery
 BOARD_HAS_NO_SELECT_BUTTON := true
-TARGET_RECOVERY_INITRC := device/samsung/core33g/init.rc
 TARGET_RECOVERY_FSTAB := device/samsung/core33g/recovery.fstab
 TARGET_RECOVERY_PIXEL_FORMAT := "RGBX_8888"
 TW_THEME := portrait_mdpi
@@ -70,4 +69,3 @@ TW_MTP_DEVICE := /dev/usb_mtp_gadget
 BOARD_HAS_NO_MISC_PARTITION := true
 BOARD_USE_CUSTOM_RECOVERY_FONT := \"roboto_10x18.h\"
 RECOVERY_GRAPHICS_USE_LINELENGTH := true
-TW_MTP_DEVICE := /dev/usb_mtp_gadget
