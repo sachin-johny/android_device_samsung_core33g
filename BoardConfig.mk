@@ -50,7 +50,6 @@ TARGET_KERNEL_CROSS_COMPILE_PREFIX := arm-eabi-
 KERNEL_TOOLCHAIN := $(ANDROID_BUILD_TOP)/prebuilts/gcc/linux-x86/arm/arm-eabi-4.8/bin
 
 # Recovery
-RECOVERY_VARIANT := twrp
 BOARD_HAS_NO_SELECT_BUTTON := true
 TARGET_RECOVERY_INITRC := device/samsung/core33g/init.rc
 TARGET_RECOVERY_FSTAB := device/samsung/core33g/recovery.fstab
