@@ -1,4 +1,0 @@
-service charger /sbin/healthd -c
-    class charger
-    critical
-    seclabel u:r:healthd:s0
