@@ -49,6 +49,9 @@ BOARD_MKBOOTIMG_ARGS := --kernel_offset 0x00008000 --ramdisk_offset 0x01000000 -
 TARGET_KERNEL_CROSS_COMPILE_PREFIX := arm-eabi-
 KERNEL_TOOLCHAIN := $(ANDROID_BUILD_TOP)/prebuilts/gcc/linux-x86/arm/arm-eabi-4.8/bin
 
+# Don't take forever to wipe
+BOARD_SUPPRESS_SECURE_ERASE := true
+
 # Recovery
 BOARD_HAS_NO_SELECT_BUTTON := true
 TW_BRIGHTNESS_PATH := /sys/class/backlight/panel/brightness
