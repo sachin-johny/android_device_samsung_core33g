@@ -56,6 +56,7 @@ BOARD_SUPPRESS_SECURE_ERASE := true
 BOARD_HAS_NO_SELECT_BUTTON := true
 TW_BRIGHTNESS_PATH := /sys/class/backlight/panel/brightness
 TARGET_RECOVERY_FSTAB := device/samsung/core33g/recovery.fstab
+TW_CUSTOM_CPU_TEMP_PATH := /sys/devices/virtual/thermal/thermal_zone1/temp
 TARGET_RECOVERY_PIXEL_FORMAT := "RGBX_8888"
 TW_THEME := portrait_mdpi
 SP1_NAME := "internal_sd"
