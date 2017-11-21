@@ -52,7 +52,7 @@ BOARD_HAVE_SAMSUNG_WIFI := true
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/samsung/core33g/bluetooth
 
 # Kernel
-TARGET_KERNEL_CONFIG := cyanogen_core33g_defconfig
+TARGET_KERNEL_CONFIG := lineage_core33g_defconfig
 TARGET_KERNEL_SOURCE := kernel/samsung/core33g
 
 # Resolution
