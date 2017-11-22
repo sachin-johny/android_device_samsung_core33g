@@ -47,10 +47,6 @@ PRODUCT_PACKAGES += \
 	init.core33g_base.rc \
 	ueventd.sc8830.rc
 
-# RIL
-PRODUCT_PACKAGES += \
-	rild.rc
-
 # WiFi
 PRODUCT_PACKAGES += \
 	libwifi-hal-bcm
