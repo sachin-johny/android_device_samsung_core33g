@@ -23,10 +23,6 @@ $(call inherit-product-if-exists, vendor/samsung/core33g/core33g-vendor.mk)
 # Inherit from scx30g-common device configuration
 $(call inherit-product, device/samsung/scx30g-common/common.mk)
 
-# Boot animation
-TARGET_SCREEN_HEIGHT := 800
-TARGET_SCREEN_WIDTH := 480
-
 # Keylayouts
 PRODUCT_COPY_FILES += \
 	$(LOCAL_PATH)/keylayout/ist30xx_ts_input.kl:system/usr/keylayout/ist30xx_ts_input.kl \

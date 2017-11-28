@@ -18,4 +18,4 @@
 #
 
 PRODUCT_MAKEFILES := \
-	$(LOCAL_DIR)/core33g.mk
+	$(LOCAL_DIR)/aosp_core33g.mk
