@@ -11,11 +11,6 @@ on early-init
 
     # coredump file will not be generated in release version
     write /proc/sys/kernel/core_pattern /dev/null
-# radio pipe
-    mkdir /dev/rpipe 0550 radio radio
-    exec -- /system/bin/mknod -m 666 /dev/rpipe/ril.vt.0 p
-    exec -- /system/bin/mknod -m 666 /dev/rpipe/ril.vt.1 p
-    exec -- /system/bin/mknod -m 666 /dev/rpipe/ril.vt.2 p
 
 on init
     mkdir /productinfo 0771 system system
