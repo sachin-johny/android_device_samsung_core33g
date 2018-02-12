@@ -106,7 +106,7 @@ on early-boot
     chown system root /sys/class/rtcc/rtcc_trigger
 
 on boot
-
+    chmod 0644 /proc/cmdline
 # Turn on all CPUs
     write /sys/devices/system/cpu/cpu1/online 1
     write /sys/devices/system/cpu/cpu2/online 1
