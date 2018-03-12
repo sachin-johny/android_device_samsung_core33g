@@ -40,13 +40,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
 	$(LOCAL_PATH)/media/mediaserver.rc:system/etc/init/mediaserver.rc
 
-# Rootdir files
-PRODUCT_PACKAGES += \
-	init.sc8830.rc \
-	init.sc8830.usb.rc \
-	init.core33g_base.rc \
-	ueventd.sc8830.rc
-
 # RIL
 PRODUCT_PACKAGES += \
 	rild.rc
