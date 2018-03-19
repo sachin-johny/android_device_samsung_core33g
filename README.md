@@ -13,7 +13,7 @@ Storage | 8 GB
 MicroSD | Up to 64 GB
 Battery | 2000 mAh Li-Ion (removable)
 Dimensions | 144.8 x 72.1 x 8.6 mm
-Display | 480 x 800 pixels, 5.0"
+Display | 480 x 800 pixels, 4.5"
 Rear Camera  | 5.0 MP, LED flash
 Front Camera | 2.0 MP
 Release Date | November 2014
@@ -26,7 +26,6 @@ Release Date | November 2014
 
 ### Building steps
 * 1. Sync Android source
-* 2. Copy this file ([core33g.xml](https://github.com/koquantam/android_local_manifests/blob/cm-14.1-core33g/core33g.xml)) to `.repo/local_manifests` (if that folder doesn't exist then "mkdir" it)
+* 2. Copy this file ([core33g.xml](https://github.com/hash07/android_local_manifests/blob/cm-14.1/core33g.xml)) to `.repo/local_manifests` (if that folder doesn't exist then "mkdir" it)
 * 3. `repo sync` again
-* 4. After syncing source and device-specific repo (from step 2), from your source root folder (where you have synced) open Terminal, `cd` to device/samsung/scx30g-common, type `./patch.sh` (this is the quick patching script)
-* 5. `cd` to your source root again, type `. build/envsetup.sh && brunch core33g`
+* 4. then type `. build/envsetup.sh && brunch core33g`
