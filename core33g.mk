@@ -38,6 +38,10 @@ PRODUCT_PACKAGES += \
 	media_profiles.xml
 
 PRODUCT_PROPERTY_OVERRIDES += \
+	ro.sf.lcd_density=240 \
+	ro.sf.lcd_width=154 \
+	ro.sf.lcd_height=90 \
+	ro.product.hardware=TSHARK_V1.0.0 \
 	media.stagefright.legacyencoder=true \
 	media.stagefright.less-secure=true
 
