@@ -48,6 +48,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_COPY_FILES += \
 	$(LOCAL_PATH)/media/mediaserver.rc:system/etc/init/mediaserver.rc
 
+# sdcardfs
+PRODUCT_PROPERTY_OVERRIDES += \
+	ro.sys.sdcardfs=true
+
 # WiFi
 $(call inherit-product, hardware/broadcom/wlan/bcmdhd/config/config-bcm.mk)
 
