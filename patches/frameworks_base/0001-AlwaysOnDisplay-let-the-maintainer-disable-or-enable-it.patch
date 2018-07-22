@@ -1,0 +1,106 @@
+From dc55734da2d605a02a5ba51a7572e96d8e3b00c2 Mon Sep 17 00:00:00 2001
+From: darjwx <darjwx@gmail.com>
+Date: Thu, 14 Sep 2017 16:11:36 +0200
+Subject: [PATCH] AlwaysOnDisplay: let the maintainer disable or enable it
+
+* AOD is a nice addition that will work well in devices with OLED displays,
+  causing high battery drain in other display panels.
+
+* Give the maintainer the ability to enable or disable it with a device overlay:
+    config_enableDozeAlwaysOn
+  False by default.
+
+Change-Id: I41d88f8bf1216e337385e669e5a249a0f0cdc882
+---
+ .../hardware/AmbientDisplayConfiguration.java |  5 +--
+ core/res/res/values/custom_config.xml         | 31 +++++++++++++++++++
+ core/res/res/values/custom_symbols.xml        | 23 ++++++++++++++
+ 3 files changed, 57 insertions(+), 2 deletions(-)
+ create mode 100644 core/res/res/values/custom_config.xml
+ create mode 100644 core/res/res/values/custom_symbols.xml
+
+diff --git a/core/java/com/android/internal/hardware/AmbientDisplayConfiguration.java b/core/java/com/android/internal/hardware/AmbientDisplayConfiguration.java
+index 1811800c..9ab62a41 100644
+--- a/core/java/com/android/internal/hardware/AmbientDisplayConfiguration.java
++++ b/core/java/com/android/internal/hardware/AmbientDisplayConfiguration.java
+@@ -99,8 +99,9 @@ public class AmbientDisplayConfiguration {
+     }
+ 
+     public boolean alwaysOnAvailable() {
+-        return (alwaysOnDisplayDebuggingEnabled() || alwaysOnDisplayAvailable())
+-                && ambientDisplayAvailable();
++        boolean enableDozeAlwaysOn = mContext.getResources().
++                getBoolean(com.android.internal.R.bool.config_enableDozeAlwaysOn);
++        return enableDozeAlwaysOn;
+     }
+ 
+     public boolean alwaysOnAvailableForUser(int user) {
+diff --git a/core/res/res/values/custom_config.xml b/core/res/res/values/custom_config.xml
+new file mode 100644
+index 00000000..e02bb32e
+--- /dev/null
++++ b/core/res/res/values/custom_config.xml
+@@ -0,0 +1,31 @@
++<?xml version="1.0" encoding="utf-8"?>
++<!--
++/*
++** Copyright 2009, The Android Open Source Project
++**
++** Licensed under the Apache License, Version 2.0 (the "License");
++** you may not use this file except in compliance with the License.
++** You may obtain a copy of the License at
++**
++**     http://www.apache.org/licenses/LICENSE-2.0
++**
++** Unless required by applicable law or agreed to in writing, software
++** distributed under the License is distributed on an "AS IS" BASIS,
++** WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++** See the License for the specific language governing permissions and
++** limitations under the License.
++*/
++-->
++
++<!-- These resources are around just to allow their values to be customized
++     for different hardware and product builds.  Do not translate.
++
++     NOTE: The naming convention is "config_camelCaseValue". Some legacy
++     entries do not follow the convention, but all new entries should. -->
++
++<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
++
++    <!-- Wheter to enable doze always on -->
++    <bool name="config_enableDozeAlwaysOn">false</bool>
++
++</resources>
+diff --git a/core/res/res/values/custom_symbols.xml b/core/res/res/values/custom_symbols.xml
+new file mode 100644
+index 00000000..2d278258
+--- /dev/null
++++ b/core/res/res/values/custom_symbols.xml
+@@ -0,0 +1,23 @@
++<?xml version="1.0" encoding="utf-8"?>
++<!--
++/* Copyright 2012, The Android Open Source Project
++**
++** Licensed under the Apache License, Version 2.0 (the "License");
++** you may not use this file except in compliance with the License.
++** You may obtain a copy of the License at
++**
++**     http://www.apache.org/licenses/LICENSE-2.0
++**
++** Unless required by applicable law or agreed to in writing, software
++** distributed under the License is distributed on an "AS IS" BASIS,
++** WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++** See the License for the specific language governing permissions and
++** limitations under the License.
++*/
++-->
++<resources>
++
++  <!-- Wheter to enable doze always on -->
++  <java-symbol type="bool" name="config_enableDozeAlwaysOn"/>
++
++</resources>
+-- 
+2.17.1
+
