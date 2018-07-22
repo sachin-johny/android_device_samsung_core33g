@@ -24,4 +24,5 @@ sh device/samsung/core33g/patches/apply.sh;
 # Prepare for lunch
 for i in eng user userdebug; do
 add_lunch_combo lineage_core33g-${i};
+add_lunch_combo rr_core33g-${i};
 done
