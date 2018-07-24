@@ -10,6 +10,9 @@ $(call inherit-product, vendor/rr/config/common_full_phone.mk)
 # Inherit device configuration
 $(call inherit-product, $(LOCAL_PATH)/core33g.mk)
 
+# Bootanimation
+TARGET_BOOTANIMATION_HALF_RES := true
+
 ## Device identifier. This must come after all inclusions
 PRODUCT_DEVICE := core33g
 PRODUCT_NAME := rr_core33g
