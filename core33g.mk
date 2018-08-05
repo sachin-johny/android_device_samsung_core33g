@@ -42,8 +42,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
 	media.stagefright.less-secure=true
 
 # Camera
-PRODUCT_PACKAGES += \
-	camera.sc8830
+#PRODUCT_PACKAGES += \
+#	camera.sc8830
 
 # Sensors
 PRODUCT_PACKAGES += \
